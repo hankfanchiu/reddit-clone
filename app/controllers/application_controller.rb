@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   def login_user!(user)
     token = user.reset_session_token!
     session[:session_token] = token
-    current_user = user
   end
 
   def current_user
@@ -16,6 +15,12 @@ class ApplicationController < ActionController::Base
 
   def logged_in?
     !current_user.nil?
+  end
+
+  private
+
+  def prevent_if_logged_in
+    redirect_to subs_url if logged_in?
   end
 
 end

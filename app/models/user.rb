@@ -1,11 +1,25 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  user_name       :string           not null
+#  password_digest :string           not null
+#  session_token   :string           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
 class User < ActiveRecord::Base
   attr_reader :password
 
-  validates :user_name, presence: true, uniqueness: true
-  validates :session_token, presence: true, uniqueness: true
+  after_initialize :ensure_session_token
+
+  validates :user_name, :session_token, presence: true, uniqueness: true
   validates :password_digest, presence: true
 
-  after_initialize :ensure_session_token
+  has_many :subs, class_name: "Sub", foreign_key: :moderator_id
+  has_many :posts, class_name: "Post", foreign_key: :author_id
 
   def self.find_by_credentials(user_name, password)
     user = User.find_by(user_name: user_name)

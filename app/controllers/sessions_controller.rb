@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
 
+  before_action :prevent_if_logged_in, only: [:new, :create]
+
   def new
     @user = User.new
     render :login

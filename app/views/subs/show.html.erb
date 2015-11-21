@@ -1,0 +1,7 @@
+<h3><%= @sub.title %></h3>
+<p><%= @sub.description %></p>
+<p>Moderated by: <%= @sub.moderator.user_name %></p>
+<% if moderator?(@sub) %>
+  <p><%= link_to "Edit", edit_sub_url, method: :get %></p>
+<% end %>
+<p><%= link_to "Create Post", new_post_url, method: :get %></p>

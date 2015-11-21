@@ -1,5 +1,13 @@
 module ApplicationHelper
 
+  def author?(post)
+    current_user == post.author
+  end
+
+  def moderator?(sub)
+    current_user == sub.moderator
+  end
+
   def authenticity
     html = <<-HTML
       <input type="hidden"

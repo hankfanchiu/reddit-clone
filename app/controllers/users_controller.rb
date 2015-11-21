@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_action :prevent_if_logged_in, only: [:new, :create]
+
   def new
     @user = User.new
     render :new
@@ -26,5 +28,4 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:user_name, :password)
   end
-
 end

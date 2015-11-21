@@ -1,0 +1,51 @@
+<% action = (post.persisted? ? post_url(post) : posts_url) %>
+<% method = (post.persisted? ? :patch : :post) %>
+<% final_button = (post.persisted? ? "Update" : "Submit") %>
+
+<form action="<%= action %>" method="post">
+  <input type="hidden" name="_method" value="<%= method %>">
+  <%= authenticity %>
+
+  <table>
+    <tr>
+      <td>
+        <label for="post_title">Post Title</label>
+      </td>
+      <td>
+        <input type="text"
+          name="post[title]"
+          id="post_title"
+          value="<%= post.title %>">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="post_url">URL</label>
+      </td>
+      <td>
+        <input type="text"
+          name="post[url]"
+          id="post_url"
+          value="<%= post.url %>">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="post_content">Content</label>
+      </td>
+      <td>
+        <textarea
+          name="post[content]"
+          id="post_content"
+          rows="5" cols="40"><%= post.content %></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        
+      </td>
+    </tr>
+  </table>
+
+  <input type="Submit" value="<%= final_button %>">
+</form>
