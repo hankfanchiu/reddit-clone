@@ -1,7 +1,7 @@
 <% if logged_in? %>
   <%= "Logged in as #{current_user.user_name}" %>
-  <%= button_to "Logout", sessions_url, method: :delete %>
+  <%= button_to "Logout", session_url, method: :delete %>
 <% else %>
-  <%= button_to "Login", new_sessions_url, method: :get %>
-  <%= button_to "Register", new_users_url, method: :get %>
+  <%= button_to "Login", new_session_url, method: :get %>
+  <%= button_to "Register", new_user_url, method: :get %>
 <% end %>
