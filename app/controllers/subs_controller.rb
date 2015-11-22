@@ -44,8 +44,8 @@ class SubsController < ApplicationController
   private
 
   def require_moderator
-    moderated_sub = current_user.subs.where(id: params[:id])
-    redirect_to sub_url(params[:id]) if moderated_sub.empty?
+    moderated_sub = current_user.subs.find(params[:id])
+    redirect_to sub_url(params[:id]) unless moderated_sub
   end
 
   def sub_params

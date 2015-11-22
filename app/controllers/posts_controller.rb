@@ -44,8 +44,8 @@ class PostsController < ApplicationController
   private
 
   def require_author
-    authored_post = current_user.posts.where(id: params[:id])
-    redirect_to post_url(params[:id]) if authored_post.empty?
+    authored_post = current_user.posts.find(params[:id])
+    redirect_to post_url(params[:id]) unless authored_post
   end
 
   def post_params

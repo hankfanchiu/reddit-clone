@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   before_action :prevent_if_logged_in, only: [:new, :create]
+  before_action :require_login!, only: :destroy
 
   def new
     @user = User.new
