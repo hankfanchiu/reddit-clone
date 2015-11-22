@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-
   before_action :require_author, only: [:edit, :update, :destroy]
 
   def new
@@ -52,5 +51,4 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :url, :content, :sub_id)
   end
-
 end

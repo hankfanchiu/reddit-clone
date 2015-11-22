@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   def author?(post)
     current_user == post.author
   end
@@ -16,5 +15,4 @@ module ApplicationHelper
     HTML
     html.html_safe
   end
-
 end

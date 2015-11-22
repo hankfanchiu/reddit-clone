@@ -1,5 +1,4 @@
 class SubsController < ApplicationController
-
   before_action :require_moderator, only: [:edit, :update]
 
   def index
@@ -53,15 +52,3 @@ class SubsController < ApplicationController
     params.require(:sub).permit(:title, :description)
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-#

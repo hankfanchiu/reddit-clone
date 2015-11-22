@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-
   before_action :prevent_if_logged_in, only: [:new, :create]
 
   def new
@@ -31,12 +30,3 @@ class SessionsController < ApplicationController
     params.require(:user).permit(:user_name, :password)
   end
 end
-
-
-
-
-
-
-
-
-#
