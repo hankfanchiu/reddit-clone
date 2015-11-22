@@ -38,7 +38,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.destroy(params[:id])
-    redirect_to sub_url(@post.sub_id)
+    redirect_to subs_url
   end
 
   private
@@ -49,6 +49,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :url, :content, :sub_id)
+    params.require(:post).permit(:title, :url, :content, sub_ids: [])
   end
 end

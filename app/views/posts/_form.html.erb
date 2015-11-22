@@ -31,6 +31,24 @@
     </tr>
     <tr>
       <td>
+        Subs
+      </td>
+      <td>
+      <% Sub.all.each do |sub| %>
+        <label>
+          <input type="checkbox"
+            name="post[sub_ids][]"
+            id="sub"
+            value="<%= sub.id %>"
+            <%= "checked" if post.sub_ids.include?(sub.id) %>>
+          <%= sub.title %>
+        </label>
+        <br/>
+      <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <label for="post_content">Content</label>
       </td>
       <td>
@@ -38,11 +56,6 @@
           name="post[content]"
           id="post_content"
           rows="5" cols="40"><%= post.content %></textarea>
-      </td>
-    </tr>
-    <tr>
-      <td>
-
       </td>
     </tr>
   </table>

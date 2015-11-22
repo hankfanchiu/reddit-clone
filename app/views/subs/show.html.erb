@@ -1,10 +1,17 @@
 <h3><%= @sub.title %></h3>
-
-<p><%= @sub.description %></p>
-<p>Moderated by: <%= @sub.moderator.user_name %></p>
-
 <% if moderator?(@sub) %>
-  <p><%= link_to "Edit", edit_sub_url, method: :get %></p>
+  <p><%= link_to "Edit Sub", edit_sub_url, method: :get %></p>
 <% end %>
+
+<p>Moderated by: <%= @sub.moderator.user_name %></p>
+<p><%= @sub.description %></p>
+<p>Posts</p>
+<ul>
+  <% @sub.posts.each do |post| %>
+  <li>
+    <%= link_to post.title, post_url(post) %>
+  </li>
+  <% end %>
+</ul>
 
 <p><%= link_to "Create Post", new_post_url, method: :get %></p>

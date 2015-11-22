@@ -1,10 +1,18 @@
 <h3><%= @post.title %></h3>
+<% if author?(@post) %>
+  <p><%= link_to "Edit", edit_post_url, method: :get %> |&nbsp;
+  <%= link_to "Delete", post_url(@post), method: :delete %></p>
+<% end %>
 
 <p><%= @post.url %></p>
-<p><%= @post.content %></p>
 <p>Authored by: <%= @post.author.user_name %></p>
+<p><%= @post.content %></p>
 
-<% if author?(@post) %>
-  <p><%= link_to "Edit", edit_post_url, method: :get %></p> |&nbsp;
-  <p><%= link_to "Delete", post_url(@post), method: :delete %></p>
-<% end %>
+<p>Subs:</p>
+<ul>
+  <% @post.subs.each do |sub| %>
+  <li>
+    <%= link_to sub.title, sub_url(sub) %>
+  </li>
+  <% end %>
+</ul>
