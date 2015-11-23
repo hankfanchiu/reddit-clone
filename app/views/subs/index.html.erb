@@ -1,11 +1,18 @@
-<h2>Here are the subs</h2>
+<div class="row">
+  <div class="col-xs-12">
 
-<ul>
-  <% @subs.each do |sub| %>
-    <li>
-      <%= link_to sub.title, sub_url(sub), method: :get %>
-    </li>
-  <% end %>
-</ul>
+    <h1>Reddit Clone</h1>
 
-<%= link_to "Create a new sub", new_sub_url %>
+    <p><%= link_to "Create a New Sub", new_sub_url %></p>
+
+    <table class="table">
+      <% @subs.each do |sub| %>
+        <tr>
+          <td>
+            <%= link_to display(sub), sub_url(sub), method: :get %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

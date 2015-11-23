@@ -1,4 +1,5 @@
 class SubsController < ApplicationController
+  before_action :require_login!, except: [:index, :show]
   before_action :require_moderator, only: [:edit, :update]
 
   def index

@@ -8,10 +8,12 @@
 </head>
 <body>
 
+<%= render 'shared/nav' %>
 <%= render 'shared/errors' %>
-<%= render 'shared/bar' %>
 
-<%= yield %>
+<div class="container">
+  <%= yield %>
+</div>
 
 </body>
 </html>

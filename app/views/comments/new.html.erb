@@ -1,20 +1,25 @@
-<h3>Post your comment!</h3>
+<div class="row">
+  <div class="col-xs-12">
 
-<form action="<%= comments_url %>" method="post">
-  <%= authenticity %>
-  <input type="hidden" name="comment[post_id]" value="<%= params[:post] %>">
+    <h1>Post your comment!</h1>
 
-  <table>
-    <tr>
-      <td>
-        <textarea name="comment[content]"
-          rows="5" cols="40"><%= @comment.content %></textarea>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <input type="submit" value="Submit">
-      </td>
-    </tr>
-  </table>
-</form>
+    <form action="<%= comments_url %>" method="post">
+      <%= authenticity %>
+      <input type="hidden" name="comment[post_id]" value="<%= params[:post] %>">
+
+      <table>
+        <tr>
+          <td>
+            <textarea name="comment[content]"
+              rows="5" cols="40"><%= @comment.content %></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="submit" value="Submit">
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>

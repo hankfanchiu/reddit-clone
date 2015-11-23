@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  root to: 'users#new'
+  root 'pages#index'
+
+  controller :pages do
+    get :home
+    get :about
+    get :contact
+  end
 
   resource :user, only: [:new, :create, :show]
 

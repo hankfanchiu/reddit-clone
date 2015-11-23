@@ -16,14 +16,6 @@ module ApplicationHelper
     html.html_safe
   end
 
-  def up_arrow
-    "&uarr;".html_safe
-  end
-
-  def down_arrow
-    "&darr;".html_safe
-  end
-
   def upvote(object)
     if object.class.name == "Post"
       action = upvote_post_url(object)
@@ -31,7 +23,7 @@ module ApplicationHelper
       action = upvote_comment_url(object)
     end
 
-    link_to up_arrow, action, method: :post
+    link_to("&#9650;".html_safe, action, method: :post )
   end
 
   def downvote(object)
@@ -41,15 +33,32 @@ module ApplicationHelper
       action = downvote_comment_url(object)
     end
 
-    link_to down_arrow, action, method: :post
+    link_to("&#9660;".html_safe, action, method: :post)
   end
 
   def vote_count(object)
     type, id = object.class.name, object.id
-    Vote.where(votable_type: type, votable_id: id).sum(:value)
+    votes = Vote.where(votable_type: type, votable_id: id)
+    votes.sum(:value)
   end
 
   def voting(object)
-    "#{upvote(object)} #{downvote(object)} (#{vote_count(object)})".html_safe
+    html = "#{upvote(object)} #{vote_count(object)} #{downvote(object)}"
+    html.html_safe
+  end
+
+  def bootstrap_class_for flash_type
+    case flash_type
+      when :success
+        "alert-success"
+      when :error
+        "alert-error"
+      when :alert
+        "alert-block"
+      when :notice
+        "alert-info"
+      else
+        flash_type.to_s
+    end
   end
 end

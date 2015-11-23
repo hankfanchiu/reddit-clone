@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       login_user!(@user)
       redirect_to user_url
     else
-      flash[:errors] = ["Login Failed..."]
+      flash[:errors] = ["Login Failed!"]
       redirect_to new_session_url
     end
   end

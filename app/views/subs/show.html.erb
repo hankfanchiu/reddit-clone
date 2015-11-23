@@ -1,4 +1,4 @@
-<h2><%= @sub.title %></h2>
+<h1><%= @sub.title %></h1>
 <% if moderator?(@sub) %>
   <p><%= link_to "Edit Sub", edit_sub_url, method: :get %></p>
 <% end %>
@@ -12,7 +12,8 @@
 <% @sub.posts.each do |post| %>
   <tr>
     <td>
-      <%= render 'posts/post', post: post %>
+      <%= voting(post) %>
+      <strong><%= link_to post.title, post_url(post) %></strong>
     </td>
   </tr>
 <% end %>

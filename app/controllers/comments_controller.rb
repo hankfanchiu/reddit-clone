@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :require_login!, except: :show
+
   def new
     @comment = Comment.new
     render :new

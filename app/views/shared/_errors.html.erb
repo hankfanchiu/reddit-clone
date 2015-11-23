@@ -1,9 +1,9 @@
-<% if flash[:errors] %>
-  <ul>
-  <% flash[:errors].each do |error| %>
-    <li>
-      <%= error %>
-    </li>
+<% flash.each do |type, _| %>
+  <% flash[type].each do |message| %>
+    <div class="alert <%= bootstrap_class_for(type) %> fade in">
+      <button class="close" data-dismiss="alert">×</button>
+      <%= message %>
+    </div>
   <% end %>
-  </ul>
 <% end %>
+
