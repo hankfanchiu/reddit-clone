@@ -7,7 +7,13 @@ Rails.application.routes.draw do
 
   resources :subs, except: :destroy
 
-  resources :posts, except: :index
+  resources :posts, except: :index do
+    post '/upvote', to: 'posts#upvote', on: :member
+    post '/downvote', to: 'posts#downvote', on: :member
+  end
 
-  resources :comments, only: [:new, :create, :show]
+  resources :comments, only: [:new, :create, :show] do
+    post '/upvote', to: 'comments#upvote', on: :member
+    post '/downvote', to: 'comments#downvote', on: :member
+  end
 end

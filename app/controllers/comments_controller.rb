@@ -19,6 +19,16 @@ class CommentsController < ApplicationController
     render :show
   end
 
+  def upvote
+    vote(1)
+    redirect_to :back
+  end
+
+  def downvote
+    vote(-1)
+    redirect_to :back
+  end
+
   private
 
   def comment_params

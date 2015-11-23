@@ -1,14 +1,11 @@
-<h3>Comment by <%= @comment.author.user_name %></h3>
+<h2><%= link_to @comment.post.title, @comment.post %></h2>
 
-<table>
-  <tr>
-    <td>
-      <%= @comment.content %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <%= render 'form', parent_comment: @comment %>
-    </td>
-  </tr>
-</table>
+<p>
+  (<%= vote_count(@comment) %>)
+  Comment by <strong><%= @comment.author.user_name %></strong>
+   <%= time_ago_in_words(@comment.created_at) %> ago
+</p>
+
+<p><%= @comment.content %></p>
+
+<%= render 'form', parent_comment: @comment %>

@@ -15,4 +15,17 @@ module ApplicationHelper
     HTML
     html.html_safe
   end
+
+  def up_arrow
+    "&uarr;".html_safe
+  end
+
+  def down_arrow
+    "&darr;".html_safe
+  end
+
+  def vote_count(object)
+    type, id = object.class.name, object.id
+    Vote.where(votable_type: type, votable_id: id).sum(:value)
+  end
 end

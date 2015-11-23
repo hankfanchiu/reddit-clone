@@ -1,0 +1,4 @@
+<%= link_to up_arrow, upvote_post_url(post), method: :post %>
+<%= link_to down_arrow, downvote_post_url(post), method: :post %>
+(<%= vote_count(post) %>)
+<strong><%= link_to post.title, post_url(post) %></strong>

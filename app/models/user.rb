@@ -17,9 +17,9 @@ class User < ActiveRecord::Base
 
   validates :user_name, :session_token, presence: true, uniqueness: true
   validates :password_digest, presence: true
-  validates :password, length: { min: 6, allow_nil: true }
+  validates :password, length: { minimum: 6, allow_nil: true }
 
-  has_many :subs
+  has_many :subs,
     class_name: "Sub",
     foreign_key: :moderator_id,
     inverse_of: :moderator
@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   has_many :votes,
     class_name: "Vote",
     foreign_key: :voter_id,
-    inverse_of: :voters
+    inverse_of: :voter
 
   def self.find_by_credentials(user_name, password)
     user = User.find_by(user_name: user_name)

@@ -1,26 +1,23 @@
 <h2><%= @post.title %></h2>
 
 <% if author?(@post) %>
-  <p><%= link_to "Edit", edit_post_url, method: :get %> |&nbsp;
-  <%= link_to "Delete", post_url(@post), method: :delete %></p>
+  <%= link_to "Edit", edit_post_url, method: :get %> |&nbsp;
+  <%= link_to "Delete", post_url(@post), method: :delete %>
 <% end %>
 
 <p>
-  <strong>Authored by: <%= @post.author.user_name %></strong><br/>
-  <i>Posted at <%= @post.created_at %></i><br/>
-  <%= link_to @post.url, @post.url %>
+  Submitted by <strong><%= @post.author.user_name %></strong>
+  <i><%= link_to "#{time_ago_in_words(@post.created_at)} ago", @post.url %></i>
+  <br/>
+  Subs:
+    <% @post.subs.each do |sub| %>
+      <%= link_to sub.title, sub_url(sub) %>&nbsp;
+    <% end %>
 </p>
 
-<p>Subs:</p>
-<ul>
-  <% @post.subs.each do |sub| %>
-  <li>
-    <%= link_to sub.title, sub_url(sub) %>
-  </li>
-  <% end %>
-</ul>
-
-<p><%= @post.content %></p>
+<table>
+  <%= @post.content %>
+</table>
 
 <h3>Comments</h3>
 

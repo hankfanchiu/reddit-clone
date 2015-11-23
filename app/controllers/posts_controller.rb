@@ -42,6 +42,16 @@ class PostsController < ApplicationController
     redirect_to subs_url
   end
 
+  def upvote
+    vote(1)
+    redirect_to :back
+  end
+
+  def downvote
+    vote(-1)
+    redirect_to :back
+  end
+
   private
 
   def require_author

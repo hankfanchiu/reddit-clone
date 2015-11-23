@@ -14,13 +14,23 @@
 class Post < ActiveRecord::Base
   validates :author_id, :title, :subs, presence: true
 
-  belongs_to :author, class_name: "User", foreign_key: :author_id
+  belongs_to :author,
+    class_name: "User",
+    foreign_key: :author_id
 
-  has_many :post_subs, dependent: :destroy, inverse_of: :post
-  has_many :subs, through: :post_subs
-  has_many :comments, dependent: :destroy
+  has_many :post_subs,
+    dependent: :destroy,
+    inverse_of: :post
 
-  has_many :votes, dependent: :destroy
+  has_many :subs,
+    through: :post_subs
+
+  has_many :comments,
+    dependent: :destroy
+
+  has_many :votes,
+    foreign_key: :votable_id,
+    dependent: :destroy
 
   def comments_by_parent_id
     comments_by_parent_id = Hash.new { |h, k| h[k] = [] }
