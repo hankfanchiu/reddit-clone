@@ -5,6 +5,7 @@ An App Academy project to create a Rails app clone of Reddit.
 ## Features
 
 - User authentication
-- Sub(reddit)s
-- Posts
-- Comments
+- Moderated sub(reddit)s
+- Cross-sub posts
+- Nested comments
+- Upvote/downvote per post and per comment
