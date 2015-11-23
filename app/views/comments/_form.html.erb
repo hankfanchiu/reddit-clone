@@ -1,0 +1,19 @@
+<form action="<%= comments_url %>" method="post">
+  <%= authenticity %>
+  <input type="hidden"
+    name="comment[post_id]"
+    value="<%= parent_comment.post_id %>">
+  <input type="hidden"
+    name="comment[parent_comment_id]"
+    value="<%= parent_comment.id %>">
+
+  <table>
+    <tr>
+      <td>
+        <textarea name="comment[content]"
+          rows="1" cols="40"></textarea>
+        <input type="submit" value="Reply">
+      </td>
+    </tr>
+  </table>
+</form>
