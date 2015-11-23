@@ -1,4 +1,4 @@
-<h2><%= @post.title %></h2>
+<h2><%= voting(@post) %> <%= @post.title %></h2>
 
 <% if author?(@post) %>
   <%= link_to "Edit", edit_post_url, method: :get %> |&nbsp;
