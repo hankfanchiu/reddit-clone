@@ -1,0 +1,25 @@
+<table>
+  <tr>
+    <td>
+      <strong><%= comment.author.user_name %></strong><br/>
+      <i>Commented at <%= comment.created_at %></i>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= comment.content %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= link_to "Reply", comment_url(comment) %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <% @comments_by_parent_id[comment.id].each do |child_comment| %>
+        <%= render 'comments/comment', comment: child_comment %>
+      <% end %>
+    </td>
+  </tr>
+</table>

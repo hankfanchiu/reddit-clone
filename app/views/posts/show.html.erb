@@ -5,8 +5,11 @@
   <%= link_to "Delete", post_url(@post), method: :delete %></p>
 <% end %>
 
-<p>Authored by: <%= @post.author.user_name %></p>
-<p><%= link_to @post.url, @post.url %></p>
+<p>
+  <strong>Authored by: <%= @post.author.user_name %></strong><br/>
+  <i>Posted at <%= @post.created_at %></i><br/>
+  <%= link_to @post.url, @post.url %>
+</p>
 
 <p>Subs:</p>
 <ul>
@@ -21,10 +24,10 @@
 
 <h3>Comments</h3>
 
-<% top_level_comments.each do |comment| %>
-  <%= render 'comment', comment: comment %>
-<% end %>
-
 <p>
   <%= link_to "Post your comment", new_comment_url(post: @post.id) %>
 </p>
+
+<% @comments_by_parent_id[nil].each do |top_level_comment| %>
+  <%= render 'comments/comment', comment: top_level_comment %>
+<% end %>

@@ -33,6 +33,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comments_by_parent_id = @post.comments_by_parent_id
     render :show
   end
 
