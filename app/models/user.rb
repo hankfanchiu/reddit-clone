@@ -17,10 +17,27 @@ class User < ActiveRecord::Base
 
   validates :user_name, :session_token, presence: true, uniqueness: true
   validates :password_digest, presence: true
+  validates :password, length: { min: 6, allow_nil: true }
 
-  has_many :subs, class_name: "Sub", foreign_key: :moderator_id
-  has_many :posts, class_name: "Post", foreign_key: :author_id
-  has_many :comments, class_name: "Comment", foreign_key: :author_id
+  has_many :subs
+    class_name: "Sub",
+    foreign_key: :moderator_id,
+    inverse_of: :moderator
+
+  has_many :posts,
+    class_name: "Post",
+    foreign_key: :author_id,
+    inverse_of: :author
+
+  has_many :comments,
+    class_name: "Comment",
+    foreign_key: :author_id,
+    inverse_of: :author
+
+  has_many :votes,
+    class_name: "Vote",
+    foreign_key: :voter_id,
+    inverse_of: :voters
 
   def self.find_by_credentials(user_name, password)
     user = User.find_by(user_name: user_name)

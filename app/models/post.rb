@@ -20,6 +20,8 @@ class Post < ActiveRecord::Base
   has_many :subs, through: :post_subs
   has_many :comments, dependent: :destroy
 
+  has_many :votes, dependent: :destroy
+
   def comments_by_parent_id
     comments_by_parent_id = Hash.new { |h, k| h[k] = [] }
 
