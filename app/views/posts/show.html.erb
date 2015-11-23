@@ -1,12 +1,12 @@
 <h3><%= @post.title %></h3>
+
 <% if author?(@post) %>
   <p><%= link_to "Edit", edit_post_url, method: :get %> |&nbsp;
   <%= link_to "Delete", post_url(@post), method: :delete %></p>
 <% end %>
 
-<p><%= @post.url %></p>
 <p>Authored by: <%= @post.author.user_name %></p>
-<p><%= @post.content %></p>
+<p><%= link_to @post.url, @post.url %></p>
 
 <p>Subs:</p>
 <ul>
@@ -16,3 +16,7 @@
   </li>
   <% end %>
 </ul>
+
+<p><%= @post.content %></p>
+
+<%= render 'comments', post: @post %>

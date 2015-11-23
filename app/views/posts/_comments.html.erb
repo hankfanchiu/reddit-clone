@@ -1,0 +1,14 @@
+<table>
+<% post.comments.each do |comment| %>
+  <tr>
+    <td>
+      Comment by <%= comment.author.user_name %><br/>
+      <%= comment.content %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<p>
+  <%= link_to "Post your comment", new_comment_url(post: post.id) %>
+</p>

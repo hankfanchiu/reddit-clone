@@ -1,0 +1,20 @@
+<h3>Post your comment!</h3>
+
+<form action="<%= comments_url %>" method="post">
+  <%= authenticity %>
+  <input type="hidden" name="comment[post_id]" value="<%= params[:post] %>">
+
+  <table>
+    <tr>
+      <td>
+        <textarea name="comment[content]"
+          rows="5" cols="40"><%= @comment.content %></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="submit" value="Submit">
+      </td>
+    </tr>
+  </table>
+</form>
