@@ -1,13 +1,28 @@
-<% post = @comment.post %>
+<div class="row">
+  <div class="col-xs-12">
 
-<h2><%= voting(post) %> <%= link_to post.title, post_url(post) %></h2>
+    <% post = @comment.post %>
+    <h1><%= voting(post) %> <%= link_to post.title, post_url(post) %></h1>
 
-<p>
-  <%= voting(@comment) %>
-  <strong><%= @comment.author.user_name %></strong>
-   <%= time_ago_in_words(@comment.created_at) %> ago
-</p>
+    <p>
+      Submitted by <strong><%= post.author.username %></strong>
+      <i><%= link_to "#{time_ago_in_words(post.created_at)} ago",
+        post.url %></i>
+      <br/>
+      Subs:
+        <% post.subs.each do |sub| %>
+          <%= link_to sub.title, sub_url(sub) %>&nbsp;
+        <% end %>
+    </p>
 
-<p><%= @comment.content %></p>
+    <p>
+      <%= voting(@comment) %>
+      <strong><%= @comment.author.username %></strong>
+       <%= time_ago_in_words(@comment.created_at) %> ago
+    </p>
 
-<%= render 'form', parent_comment: @comment %>
+    <p><%= @comment.content %></p>
+
+    <%= render 'form', parent_comment: @comment %>
+  </div>
+</div>

@@ -23,9 +23,39 @@ class UsersController < ApplicationController
     render :show
   end
 
+  def update
+    @user = current_user
+
+    if @user.is_password?(user_params[:password])
+      attributes = {
+        name: user_params[:name],
+        email: user_params[:email],
+        password: user_params[:password],
+        password_confirmation: user_params[:password_confirmation]
+      }
+
+      if @user.update(attributes)
+        flash[:success] = ["Profile updated!"]
+        redirect_to user_url
+      else
+        flash.now[:errors] = @user.errors.full_messages
+        render :show
+      end
+    else
+      flash.now[:errors] = ["Update failed"]
+      render :show
+    end
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:user_name, :password)
+    params.require(:user).permit(
+      :username,
+      :name,
+      :email,
+      :password,
+      :password_confirmation
+      )
   end
 end

@@ -1,30 +1,35 @@
-<h2><%= voting(@post) %> <%= @post.title %></h2>
+<div class="row">
+  <div class="col-xs-12">
+    <h1><%= voting(@post) %> <%= @post.title %></h1>
 
-<% if author?(@post) %>
-  <%= link_to "Edit", edit_post_url, method: :get %> |&nbsp;
-  <%= link_to "Delete", post_url(@post), method: :delete %>
-<% end %>
-
-<p>
-  Submitted by <strong><%= @post.author.user_name %></strong>
-  <i><%= link_to "#{time_ago_in_words(@post.created_at)} ago", @post.url %></i>
-  <br/>
-  Subs:
-    <% @post.subs.each do |sub| %>
-      <%= link_to sub.title, sub_url(sub) %>&nbsp;
+    <% if author?(@post) %>
+      <%= link_to "Edit", edit_post_url, method: :get %> |&nbsp;
+      <%= link_to "Delete", post_url(@post), method: :delete %>
     <% end %>
-</p>
 
-<table>
-  <%= @post.content %>
-</table>
+    <p>
+      Submitted by <strong><%= @post.author.username %></strong>
+      <i><%= link_to "#{time_ago_in_words(@post.created_at)} ago",
+        @post.url %></i>
+      <br/>
+      Subs:
+        <% @post.subs.each do |sub| %>
+          <%= link_to sub.title, sub_url(sub) %>&nbsp;
+        <% end %>
+    </p>
 
-<h3>Comments</h3>
+    <table>
+      <%= @post.content %>
+    </table>
 
-<p>
-  <%= link_to "Post your comment", new_comment_url(post: @post.id) %>
-</p>
+    <h3>Comments</h3>
 
-<% @comments_by_parent_id[nil].each do |top_level_comment| %>
-  <%= render 'comments/comment', comment: top_level_comment %>
-<% end %>
+    <p>
+      <%= link_to "Post your comment", new_comment_url(post: @post.id) %>
+    </p>
+
+    <% @comments_by_parent_id[nil].each do |top_level_comment| %>
+      <%= render 'comments/comment', comment: top_level_comment %>
+    <% end %>
+  </div>
+</div>

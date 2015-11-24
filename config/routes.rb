@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'pages#index'
+  root 'pages#home'
 
   controller :pages do
     get :home
@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     get :contact
   end
 
-  resource :user, only: [:new, :create, :show]
+  resource :user, only: [:new, :create, :show, :update]
 
   resource :session, only: [:new, :create, :destroy]
 

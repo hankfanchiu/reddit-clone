@@ -1,22 +1,27 @@
-<h1><%= @sub.title %></h1>
-<% if moderator?(@sub) %>
-  <p><%= link_to "Edit Sub", edit_sub_url, method: :get %></p>
-<% end %>
+<div class="row">
+  <div class="col-xs-12">
 
-<p>Moderated by <%= @sub.moderator.user_name %></p>
-<p><%= @sub.description %></p>
+    <h1><%= @sub.title %></h1>
 
-<h3>Posts</h3>
+    <% if moderator?(@sub) %>
+      <p><%= link_to "Edit Sub", edit_sub_url, method: :get %></p>
+    <% end %>
 
-<table>
-<% @sub.posts.each do |post| %>
-  <tr>
-    <td>
-      <%= voting(post) %>
-      <strong><%= link_to post.title, post_url(post) %></strong>
-    </td>
-  </tr>
-<% end %>
-</table>
+    <p>Moderated by <%= @sub.moderator.username %></p>
+    <p><%= @sub.description %></p>
 
-<p><%= link_to "Create Post", new_post_url, method: :get %></p>
+    <h2>Posts</h2>
+    <p><%= link_to "Submit Post", new_post_url, method: :get %></p>
+
+    <table>
+    <% @sub.posts.each do |post| %>
+      <tr>
+        <td>
+          <%= voting(post) %>
+          <strong><%= link_to post.title, post_url(post) %></strong>
+        </td>
+      </tr>
+    <% end %>
+    </table>
+  </div>
+</div>
