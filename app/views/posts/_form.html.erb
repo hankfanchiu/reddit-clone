@@ -2,67 +2,62 @@
 <% method = (post.persisted? ? :patch : :post) %>
 <% final_button = (post.persisted? ? "Update" : "Submit") %>
 
-<form action="<%= action %>" method="post">
-  <input type="hidden" name="_method" value="<%= method %>">
-  <%= authenticity %>
+<div class="col-xs-8">
 
-  <table>
-    <tr>
-      <td>
-        <label for="post_title">Title</label>
-      </td>
-      <td>
-        <input type="text"
-          name="post[title]"
-          id="post_title"
-          value="<%= post.title %>">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label for="post_url">URL</label>
-      </td>
-      <td>
-        <input type="text"
-          name="post[url]"
-          id="post_url"
-          value="<%= post.url %>">
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Subs
-      </td>
-      <td>
+  <form action="<%= action %>" method="post">
+    <input type="hidden" name="_method" value="<%= method %>">
+    <%= authenticity %>
+
+    <div class="form-group">
+      <label for="post_title">Title</label>
+      <input type="text"
+        name="post[title]"
+        class="form-control"
+        id="post_title"
+        value="<%= post.title %>">
+    </div>
+
+    <div class="form-group">
+      <label for="post_url">URL</label>
+      <input type="text"
+        name="post[url]"
+        class="form-control"
+        id="post_url"
+        value="<%= post.url %>">
+    </div>
+
+    <h4>Subs</h4>
+    <div id="subs">
       <input type="hidden"
             name="post[sub_ids][]"
             id="sub"
             value="">
-      <% Sub.all.each do |sub| %>
-        <label>
-          <input type="checkbox"
-            name="post[sub_ids][]"
-            id="sub"
-            value="<%= sub.id %>"
-            <%= "checked" if post.sub_ids.include?(sub.id) %>>
-          <%= sub.title %>
-        </label>
-        <br/>
-      <% end %>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label for="post_content">Content</label>
-      </td>
-      <td>
-        <textarea
-          name="post[content]"
-          id="post_content"
-          rows="5" cols="40"><%= post.content %></textarea>
-      </td>
-    </tr>
-  </table>
 
-  <input type="Submit" value="<%= final_button %>">
-</form>
+      <% Sub.all.each do |sub| %>
+        <div class="checkbox">
+          <label for="sub">
+            <input type="checkbox"
+              name="post[sub_ids][]"
+              id="sub"
+              value="<%= sub.id %>"
+              <%= "checked" if post.subbed?(sub) %>>
+            <%= sub.title %>
+          </label>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <label for="post_content">Content</label>
+      <textarea
+        name="post[content]"
+        id="post_content"
+        rows="5"
+        style="resize: vertical"
+        class="form-control"><%= post.content %></textarea>
+    </div>
+
+    <button type="submit"
+      class="btn btn-primary">Update Post</button>
+  </form>
+</div>

@@ -41,4 +41,8 @@ class Post < ActiveRecord::Base
 
     comments_by_parent_id
   end
+
+  def subbed?(sub)
+    subs.include?(sub)
+  end
 end

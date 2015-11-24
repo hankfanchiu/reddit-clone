@@ -9,8 +9,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+
     if @user.save
       login_user!(@user)
+      flash[:success] = ["Account created!"]
       redirect_to user_url
     else
       flash.now[:errors] = @user.errors.full_messages
@@ -27,14 +29,7 @@ class UsersController < ApplicationController
     @user = current_user
 
     if @user.is_password?(user_params[:password])
-      attributes = {
-        name: user_params[:name],
-        email: user_params[:email],
-        password: user_params[:password],
-        password_confirmation: user_params[:password_confirmation]
-      }
-
-      if @user.update(attributes)
+      if @user.update(user_params.except(:username))
         flash[:success] = ["Profile updated!"]
         redirect_to user_url
       else

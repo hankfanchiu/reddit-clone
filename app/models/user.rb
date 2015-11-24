@@ -19,14 +19,14 @@ class User < ActiveRecord::Base
 
   before_save { self.email = email.downcase }
 
-  validates :username, :session_token, presence: true, uniqueness: true
-  validates :password_digest, :email, :name, presence: true
+  validates_uniqueness_of :username, :session_token
+  validates_presence_of :password_digest, :email, :name
 
   validates :password,
     length: { minimum: 6, allow_nil: true },
     confirmation: true
 
-  validates :password_confirmation, presence: true
+  validates_presence_of :password_confirmation, allow_nil: true
 
   has_many :subs,
     class_name: "Sub",
@@ -48,13 +48,16 @@ class User < ActiveRecord::Base
     foreign_key: :voter_id,
     inverse_of: :voter
 
-  def self.find_by_credentials(username, password)
+  def self.find_by_credentials(username, maybe_password)
     user = User.find_by(username: username)
-    if user.nil?
-      nil
-    else
-      user.is_password?(password) ? user : nil
-    end
+
+    return nil unless user
+
+    user.is_password?(maybe_password) ? user : nil
+  end
+
+  def self.generate_session_token
+    SecureRandom.urlsafe_base64
   end
 
   def password=(password)
@@ -62,13 +65,13 @@ class User < ActiveRecord::Base
     self.password_digest = BCrypt::Password.create(password)
   end
 
-  def is_password?(password)
+  def is_password?(maybe_password)
     saved_password = BCrypt::Password.new(self.password_digest)
-    saved_password.is_password?(password)
+    saved_password.is_password?(maybe_password)
   end
 
   def reset_session_token!
-    self.session_token = generate_session_token
+    self.session_token = self.class.generate_session_token
     self.save!
     self.session_token
   end
@@ -76,10 +79,6 @@ class User < ActiveRecord::Base
   private
 
   def ensure_session_token
-    self.session_token ||= generate_session_token
-  end
-
-  def generate_session_token
-    SecureRandom.urlsafe_base64
+    self.session_token ||= self.class.generate_session_token
   end
 end
