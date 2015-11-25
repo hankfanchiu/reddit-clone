@@ -1,7 +1,7 @@
 <table>
   <tr>
     <td>
-      <%= voting(comment) %>
+      <%= upvote(comment) %>
     </td>
     <td>
       <strong><%= comment.author.username %></strong>
@@ -9,15 +9,19 @@
     </td>
   </tr>
   <tr>
-    <td></td>
+    <td>
+      <%= vote_count(comment) %>
+    </td>
     <td>
       <%= comment.content %>
     </td>
   </tr>
   <tr>
-    <td></td>
     <td>
-      <%= button_to "Reply", comment_url(comment), method: :get %>
+      <%= downvote(comment) %>
+    </td>
+    <td>
+      <%= link_to "Reply", comment_url(comment) %>
     </td>
   </tr>
   <tr>
